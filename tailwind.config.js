@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'racing-one': ['"Racing Sans One"', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }
