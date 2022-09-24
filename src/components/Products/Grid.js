@@ -1,31 +1,37 @@
-import React from 'react'
-import Loading_icon from '../../media/img/Loading_icon.gif'
-
+import React, { useEffect, useState } from 'react'
+import ProductPreview from './ProductPreview'
 const Grid = () => {
-  return (
-    <div className='flex flex-wrap gap-2 w-4/5 mx-auto'>
-        <div className='w-80 h-72 bg-black'>
-            {/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}
-        </div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
-        <div className='w-80 h-72 bg-black'>{/*<img src={Loading_icon} className={'w-auto h-full'} alt="loading..." />*/}</div>
+    const [products, setProducts] = useState([])
+    const [isLoading, setisLoading] = useState(false)
+    useEffect(() => {
+      let uploadProducts = async () => {
+        setisLoading(true)
+        let categoryResponse = await fetch(`https://fakestoreapi.com/products/category/men's clothing`)
+        let categoryJson = await categoryResponse.json()
+        setisLoading(false)
+        setProducts(categoryJson)
+      }
+      uploadProducts()
+    }, [])
+    
+
+
+  return isLoading?
+  (
+    <div className='flex flex-wrap justify-between gap-2 w-4/5 mx-auto'>
+        <ProductPreview title={'Jordan'} description={'Altas bambas negras re facheritas mi rey, ni messi se animo a tantos, es la mezcla entre lebron y messi'}/>
+        <ProductPreview title={'Jordan'} description={'Altas bambas negras re facheritas mi rey, ni messi se animo a tantos, es la mezcla entre lebron y messi'}/>
+        <ProductPreview title={'Jordan'} description={'Altas bambas negras re facheritas mi rey, ni messi se animo a tantos, es la mezcla entre lebron y messi'}/>
+        <ProductPreview title={'Jordan'} description={'Altas bambas negras re facheritas mi rey, ni messi se animo a tantos, es la mezcla entre lebron y messi'}/>
     </div>
+  )
+  :
+  (
+    <div className='flex flex-wrap justify-between gap-2 w-4/5 mx-auto'>
+        {products && products.map((singleProduct)=>{
+            return <ProductPreview title={singleProduct.title} src={singleProduct.image} description={singleProduct.description}/>
+        })}
+        </div>
   )
 }
 
