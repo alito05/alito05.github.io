@@ -28,8 +28,8 @@ const Grid = () => {
   :
   (
     <div className='flex flex-wrap justify-between gap-2 w-4/5 mx-auto'>
-        {products && products.map((singleProduct)=>{
-            return <ProductPreview title={singleProduct.title} src={singleProduct.image} description={singleProduct.description}/>
+        {products && products.map((singleProduct, key)=>{
+            return <ProductPreview key={key} title={singleProduct.title} src={singleProduct.image} description={singleProduct.description} id={singleProduct.id}/>
         })}
         </div>
   )
