@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         'racing-one': ['"Racing Sans One"', 'cursive'],
       },
+      backgroundColor:{
+        'whitey': '#E5E5E5'
+      }
     },
   },
   plugins: [],
