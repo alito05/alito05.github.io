@@ -1,18 +1,38 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import ProductPreview from './ProductPreview'
 const Grid = () => {
     const [products, setProducts] = useState([])
     const [isLoading, setisLoading] = useState(false)
+    const {pathname} = useLocation()
+    console.log('location',pathname)
     useEffect(() => {
       let uploadProducts = async () => {
         setisLoading(true)
-        let categoryResponse = await fetch(`https://fakestoreapi.com/products/category/men's clothing`)
+        let category = ''
+        switch(pathname){
+          case '/men':
+            category = `/category/men's clothing`
+            break
+          case '/women':
+            category = `/category/women's clothing`
+            break
+          case '/kids':
+            category = `/category/jewelery`
+            break
+          case '/all':
+            category = ``
+            break
+        }
+        let toFetch = `https://fakestoreapi.com/products${category}`
+        console.log('toFetch', toFetch)
+        let categoryResponse = await fetch(toFetch)
         let categoryJson = await categoryResponse.json()
         setisLoading(false)
         setProducts(categoryJson)
       }
       uploadProducts()
-    }, [])
+    }, [pathname])
     
 
 

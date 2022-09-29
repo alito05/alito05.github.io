@@ -14,7 +14,7 @@ const NavBar = props => {
     <div className='fixed w-full top-0 p-6 flex justify-between text-center bg-white'>
         <Link to={'/'}><img className='h-5 pt-1' src={airJordan}/></Link>
         <ul className='flex justify-between w-3/12 font-racing-one text-base'>
-          <Link to={'/men'}>MEN</Link>
+          <Link to={`/men`}>MEN</Link>
           <Link to={'/women'}>WOMEN</Link>
           <Link to={'/kids'}>KIDS</Link>
           <Link to={'/All'}>ALL</Link>
